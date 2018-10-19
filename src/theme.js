@@ -23,6 +23,11 @@ const shouldChangeIfNotEqual = themeName => {
 
 module.exports.TYPE = TYPE;
 
+module.exports.getCurrent = () => {
+  reloadConfig();
+  return wbconfig.get('colorTheme');
+};
+
 module.exports.change = (type, context) => {
   const { dark_theme, light_theme } = context.globalState.get('CONFIG');
 

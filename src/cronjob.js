@@ -9,6 +9,8 @@ let instance = null;
 let paused = false;
 let status;
 
+const enableSwitch = true;
+
 const changeStatusText = () => {
   if (status) {
     status.text = `ThemeChanger: ${paused ? '✕' : '✓'}`;
@@ -54,12 +56,21 @@ module.exports = {
           .set('hour', end_hour)
           .set('minute', end_minute);
 
-        if (now.isBetween(dStart, dEnd)) {
-          Theme.change(Theme.TYPE.DARK, context);
+        if (enableSwitch) {
+          const { dark_theme } = context.globalState.get('CONFIG');
+          if (dark_theme === Theme.getCurrent()) {
+            Theme.change(Theme.TYPE.LIGHT, context);
+          } else {
+            Theme.change(Theme.TYPE.DARK, context);
+          }
         } else {
-          Theme.change(Theme.TYPE.LIGHT, context);
+          if (now.isBetween(dStart, dEnd)) {
+            Theme.change(Theme.TYPE.DARK, context);
+          } else {
+            Theme.change(Theme.TYPE.LIGHT, context);
+          }
         }
-      }, 10 * 1000); // * 60); // Check each 5 minutes if theme has to be changed
+      }, 5 * 1000); // * 60); // Check each 5 minutes if theme has to be changed
     }
   },
   dispose() {
