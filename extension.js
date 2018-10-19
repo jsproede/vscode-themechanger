@@ -1,7 +1,7 @@
-const { commands } = require("vscode");
+const { commands } = require('vscode');
 
-const Configurator = require("./src/configuration");
-const Cron = require("./src/cronjob");
+const Configurator = require('./src/configuration');
+const Cron = require('./src/cronjob');
 
 const runConfigurator = context => {
   Configurator.configurate(context)
@@ -15,7 +15,7 @@ function activate(context) {
   runConfigurator(context);
 
   context.subscriptions.push(
-    commands.registerCommand("extension.tcResetSettings", () => {
+    commands.registerCommand('extension.tcResetSettings', () => {
       Cron.dispose();
       runConfigurator(context);
     })
