@@ -1,0 +1,43 @@
+{
+    "name": "themechanger",
+    "displayName": "ThemeChanger",
+    "description": "A extension which set's a dark and light theme by position of the sun",
+    "version": "0.0.1",
+    "publisher": "appcom",
+    "engines": {
+        "vscode": "^1.27.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.tcResetSettings",
+                "title": "ThemeChanger: Reset settings"
+            },
+            {
+                "command": "extension.tcPause",
+                "title": "ThemeChanger: Pause extension"
+            }
+        ]
+    },
+    "scripts": {
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.21",
+        "eslint": "^4.11.0",
+        "@types/node": "^8.10.25",
+        "@types/mocha": "^2.2.42"
+    },
+    "dependencies": {
+        "dayjs": "^1.7.7"
+    }
+}

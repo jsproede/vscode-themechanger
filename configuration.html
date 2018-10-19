@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Coding</title>
+    <style>
+        form label {
+            display: block;
+            margin: 10px 0;
+        }
+
+        form label input {
+            display: block;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+
+        form button {
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 0;
+            text-transform: uppercase;
+            background: rgb(104, 187, 255);
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>ThemeChanger</h1>
+    <img src="https://media.giphy.com/media/1jWAx072bAJwMebcl7/giphy.gif" width="300" />
+    <p>
+        This extension runs a cronjob to periodically check if the time
+        specified by you has been reached and updates then to your specified theme.
+    </p>
+    <form>
+        <label>
+            Enter the start time (24h format) when the light theme should be shown:
+            <input placeholder="HH:mm" id="start" type="time">
+            <span>Example: <code>09:00</code></span>
+        </label>
+        <label>
+            Enter the end time (24h format) when the dark theme should be shown:
+            <input placeholder="HH:mm" id="end" type="time">
+            <span>Example: <code>18:00</code></span>
+        </label>
+        <label>
+            Enter the name of the light theme:
+            <input placeholder="Light theme name" id="light_theme">
+            <span>Example: <code>Default Light+</code></span>
+        </label>
+        <label>
+            Enter the name of the dark theme:
+            <input placeholder="Dark theme name" id="dark_theme">
+            <span>Example: <code>Default Dark+</code></span>
+        </label>
+
+        <p>
+            Press Command+Shift+P, type 'Color Theme', press enter and then type in any
+            color theme you want to use.
+        </p>
+
+        <button id="submit">Save</button>
+    </form>
+
+    <script>
+        const vscode = acquireVsCodeApi();
+
+        document.querySelector('#submit').onclick = function () {
+            vscode.postMessage({
+                command: 'configuration',
+                start: document.querySelector('#start').value,
+                end: document.querySelector('#end').value,
+                light_theme: document.querySelector('#light_theme').value,
+                dark_theme: document.querySelector('#dark_theme').value
+            });
+        }
+    </script>
+</body>
+
+</html>
